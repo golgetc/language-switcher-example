@@ -6,7 +6,7 @@ This is a simple example demonstrating how to use a JSON file for language switc
 
 To get started, simply clone this repository and open the `index.html` file in your browser.
 
-git clone https://github.com/yourusername/language-switcher-example.git
+git clone https://github.com/golgetc/language-switcher-example.git
 
 ## How It Works
 
