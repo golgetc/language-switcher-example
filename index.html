@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Switcher</title>
+</head>
+<body>
+    <h1 id="welcome-text"></h1>
+    <p id="last-updated-text"></p>
+    <button id="change-language">Dil Değiştir</button>
+
+    <script>
+        const welcomeText = document.getElementById('welcome-text');
+        const lastUpdatedText = document.getElementById('last-updated-text');
+        const changeLanguageButton = document.getElementById('change-language');
+
+        let currentLanguage = 'tr';
+
+        function fetchTranslations() {
+            return fetch('lang.json')
+                .then(response => response.json())
+                .catch(error => console.error('Error fetching translations:', error));
+        }
+
+        function updateTextContent(translations) {
+            welcomeText.textContent = translations[currentLanguage].hosgeldiniz;
+            lastUpdatedText.textContent = translations[currentLanguage].son_guncelleme + ' ' + new Date().toLocaleString();
+        }
+
+        function changeLanguage() {
+            currentLanguage = currentLanguage === 'tr' ? 'en' : 'tr';
+            updateTextContent(window.translations);
+        }
+
+        fetchTranslations()
+            .then(translations => {
+                window.translations = translations;
+                updateTextContent(translations);
+
+                changeLanguageButton.addEventListener('click', changeLanguage);
+            });
+    </script>
+</body>
+</html>
